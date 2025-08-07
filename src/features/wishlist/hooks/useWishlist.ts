@@ -1,38 +1,19 @@
 import { useEffect, useState } from 'react';
 import type { WishlistItem } from '../types';
+import { mockWishlist } from '../mocks/task.ts';
 
 export const useWishlist = () => {
     const [items, setItems] = useState<WishlistItem[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const saved = localStorage.getItem('wishlist');
-        if (saved) setItems(JSON.parse(saved));
+        const timrout = setTimeout(() => {
+            setItems(mockWishlist);
+            setIsLoading(false);
+        }, 500);
+
+        return () => clearTimeout(timrout);
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('wishlist', JSON.stringify(items));
-    }, [items]);
-
-    const addItem = (name: string) => {
-        const newItem: WishlistItem = {
-            id: crypto.randomUUID(),
-            name,
-            bought: false,
-        };
-        setItems([...items, newItem]);
-    };
-
-    const deleteItem = (id: string) => {
-        setItems(items.filter((item) => item.id !== id));
-    };
-
-    const toggleItem = (id: string) => {
-        setItems(
-            items.map((item) =>
-                item.id === id ? { ...item, bought: !item.bought } : item
-            )
-        );
-    };
-
-    return { items, addItem, deleteItem, toggleItem };
+    return {items, isLoading};
 };
