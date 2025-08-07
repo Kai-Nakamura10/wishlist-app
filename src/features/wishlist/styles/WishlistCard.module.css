@@ -26,3 +26,19 @@
     font-size: 0.9rem;
     color: #555;;
 }
+
+.actions {
+    margin-top: 0.5rem;
+}
+
+.actions button {
+    padding: 0.25rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.actions button:hover {
+    background-color: #ddd;;
+}
