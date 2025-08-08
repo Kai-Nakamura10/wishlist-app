@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import WishlistList from './containers/WishlistContainer';
 import { useWishlist } from './contexts/WishlistContext';
+import styles from './styles/WishlistPage.module.css';
 
 export default function WishlistPage() {
   const { items, isLoading, handleToggle, handleDelete } = useWishlist();
@@ -11,7 +12,7 @@ export default function WishlistPage() {
 
       {/* ✅ ここに追加リンクを表示 */}
       <div style={{ marginBottom: '1rem' }}>
-        <Link to="/wishlist/new" style={{ fontWeight: 'bold', textDecoration: 'none' }}>
+        <Link to="/wishlist/new" className={styles.addButton}>
           + 欲しいものを追加
         </Link>
       </div>

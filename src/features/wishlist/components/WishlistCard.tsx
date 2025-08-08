@@ -32,6 +32,13 @@ export default function WishlistCard({ item, onToggle, onDelete }: Props) {
         >
           🗑 削除
         </button>
+        <Link
+          to={`/wishlist/${item.id}/edit`}
+          className={styles.link}
+          style={{ marginLeft: '1rem' }}
+        >
+          ✏️ 編集
+        </Link>
       </div>
     </div>
   );
