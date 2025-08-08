@@ -6,7 +6,7 @@ import { useWishlist } from '../contexts/WishlistContext';
 export default function WishlistEditPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { items } = useWishlist();
+  const { items, handleUpdate } = useWishlist();
   const [name, setName] = useState('');
 
   const item = items.find((item) => item.id === id);
@@ -19,10 +19,7 @@ export default function WishlistEditPage() {
 
   const handleSave = () => {
     if (!item) return;
-    const updated = items.map((i) =>
-      i.id === item.id ? { ...i, name } : i
-    );
-    localStorage.setItem('wishlist', JSON.stringify(updated));
+    handleUpdate(item.id, name); // ✅ Context の状態を更新
     navigate('/wishlist');
   };
 

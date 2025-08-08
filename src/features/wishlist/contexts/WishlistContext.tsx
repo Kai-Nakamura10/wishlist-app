@@ -10,6 +10,7 @@ type WishlistContextType = {
   handleToggle: (id: string) => void;
   handleDelete: (id: string) => void;
   handleAdd: (name: string) => void;
+  handleUpdate: (id: string, name: string) => void;
 };
 
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
@@ -49,8 +50,16 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
     setItems(prev => [...prev, newItem]);
   };
 
+  const handleUpdate = (id: string, name: string) => {
+    setItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, name } : item
+      )
+    );
+  };
+
   return (
-    <WishlistContext.Provider value={{ items, isLoading, handleToggle, handleDelete, handleAdd }}>
+    <WishlistContext.Provider value={{ items, isLoading, handleToggle, handleDelete, handleAdd, handleUpdate }}>
       {children}
     </WishlistContext.Provider>
   );
