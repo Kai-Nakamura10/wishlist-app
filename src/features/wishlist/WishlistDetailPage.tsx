@@ -1,6 +1,6 @@
 // src/features/wishlist/pages/WishlistDetailPage.tsx
 import { useParams, Link } from 'react-router-dom';
-import { useWishlist } from './hooks/useWishlist';
+import { useWishlist } from './contexts/WishlistContext';
 
 export default function WishlistDetailPage() {
   const { id } = useParams<{ id: string }>();
